@@ -17,8 +17,9 @@ def get_proxies(soup):
     proxies = []
     for tr in trs:
         tds = tr.find_all('td')
-        proxies.append(":".join(td.text for td in tds[:2]) + "\n")
-
+        # only HTTPS
+        if tds[6].text == "yes":
+            proxies.append(":".join(td.text for td in tds[:2]) + "\n")
     return proxies
 
 def main():
